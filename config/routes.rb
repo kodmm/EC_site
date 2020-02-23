@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'admins/index'
+  get 'admins/show'
+  get 'admins/edit'
   get 'end_users/show'
   get 'end_users/edit'
   get 'end_users/confirm'
