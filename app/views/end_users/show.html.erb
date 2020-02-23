@@ -1,2 +1,49 @@
-<h1>EndUsers#show</h1>
-<p>Find me in app/views/end_users/show.html.erb</p>
+<h1>登録情報</h1>
+<div class="container">
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-1">
+            
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>氏名</td>
+                        <td><%= current_end_user.name %></td>
+                    </tr>
+                    <tr>
+                        <td>カナ</td>
+                        <td><%= current_end_user.kana_surname %>　<%= current_end_user.kana_name %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>郵便番号</td>
+                        <td>〒<%= current_end_user.postal_code %></td>
+                        <!--- slice.(1..4)で分割表示することも可--->
+                    </tr>
+                    <tr>
+                        <td>電話番号</td>
+                        <td><%= current_end_user.phone_number %></td>
+                    </tr>
+                    <tr>
+                        <td>メールアドレス</td>
+                        <td><%= current_end_user.email %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
