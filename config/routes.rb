@@ -1,14 +1,9 @@
 Rails.application.routes.draw do
-  get 'admins/index'
-  get 'admins/show'
-  get 'admins/edit'
-  get 'end_users/show'
-  get 'end_users/edit'
-  get 'end_users/confirm'
+  root 'items#top'
   devise_for :admins
   devise_for :end_users
-  get 'items/index'
-  get 'items/top'
-  get 'items/show'
+  resources :admins, only:[:show, :index, :edit]
+  resources :end_users, only:[:show, :edit, :confirm]
+  resources :items, only:[:index, :show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
