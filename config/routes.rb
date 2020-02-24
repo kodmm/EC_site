@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'items#top'
+
   get '/end_user/mypage'=> 'end_users#show', as: 'mypage_end_user'
+  get '/about' => 'abouts#about', as: 'about'
   devise_for :admins
   devise_for :end_users
   resources :admins, only:[:show, :index, :edit]
