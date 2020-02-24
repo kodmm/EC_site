@@ -13,8 +13,16 @@
     <div class="header container">
       <div class="row">
         <div class="col-md-3 col-md-offset-1">
+          <%= link_to <h2>LOGO</h2>, root_path %>
         </div>
         <div class="col-md-6" id="sidemenu">
+          <ul class="nav navbar-nav navbar-right">
+            <% if end_user_signed_in? %>
+              <li class="">
+                <%= link_to "カート", items_path %>
+              </li>
+              <li class="">
+                <%= link_to "会員一覧", >
         </div>
       </div>
     </div>
