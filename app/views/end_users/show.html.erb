@@ -1,10 +1,17 @@
-<h1>登録情報</h1>
+<h1>マイページ</h1>
 <div class="container">
     <div class="row">
+        <div class="col-md-5 col-md-offset-1 flex">
+            <h2>登録情報</h2>
+            <button type="button" class="btn btn-primary"><%= link_to "編集する", edit_end_user_path %></button>
+            <button type="button" class="btn btn-primary link_color"><%= link_to "パスワードを変更する", edit_end_user_password_path %></button>
+        </div>
+        
     </div>
+    <br>
     <div class="row">
         <div class="col-md-6 col-md-offset-1">
-            
+        
             <table class="table">
                 <tbody>
                     <tr>
