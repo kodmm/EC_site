@@ -1,0 +1,49 @@
+<h2>Log in</h2>
+
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<div class="row">
+      <div class="col-md-6 col-md-offset-1">
+        <p>会員の方はこちらからログイン</p>
+      </div>
+        <div class="col-md-6 col-md-offset-2">
+        <%= render "devise/shared/error_messages", resource: resource %>
+            <table class="table">
+                <tbody>
+                    <tr>
+                         <td><%= f.label :email, "E-mail" %></td>
+                          <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メール" %></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">&nbsp; </td>
+                    </tr> 
+                        <td><%= f.label :password %></td>
+                        <td><%= f.password_field :password, autocomplete: "new-password" , placeholder: "パスワード"%></td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td><%= link_to "⇒パスワードを忘れた方はこちら", new_end_user_password_path %></td>
+                    </tr>
+                    <tr>
+                      <td> &nbsp;</td>
+                      <td><%= f.submit "Log In", class:"btn btn-primary" %></td>
+                    <tr>
+                   
+                   
+                </tbody>
+            </table>
+        </div>
+        <div class="row col-md-6 col-md-offset-1">
+          <p>登録がお済みでない方</p>
+          <div class="row col-md-7 col-md-offset-2">
+              <p><%= link_to "こちら", new_end_user_registration_path %>から新規登録を行ってください</p>
+          </div>
+        </div>
+</div>
+  
+
+
+<% end %>
+
+
+
