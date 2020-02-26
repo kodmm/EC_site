@@ -3,23 +3,29 @@ Rails.application.routes.draw do
     get 'top/top'
   end
 
+  get '/end_user/mypage'=> 'end_users/end_users#show', as: 'mypage_end_user'
+
   namespace :admins do
     resources :genres, only:[:index, :edit]
     resources :orders, only:[:index, :new]
     resources :items, only:[:index, :new]
     resources :end_users, only:[:index, :show]
   end
+
   namespace :end_users do
-    resource :cart_items, only:[:index]
+    resources :cart_items, only:[:index]
     resources :items, only:[:index, :show]
     get 'items/top'
-    resources :end_users, only:[:show, :edit]
+
     get 'end_users/confirm'
   end
+  scope module: :end_users do
+    resource :end_users, only:[:index, :edit, :confirm, :update]
+  end
 
-  root 'items#top'
+  root 'end_users/items#top'
   resources :admins, only:[:show, :index, :edit]
-  resource :end_user, only:[:edit, :confirm, :update]
+
 
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',
@@ -32,10 +38,7 @@ Rails.application.routes.draw do
     registrations: 'end_users/registrations'
   }
 
-  
 
-
-  get '/end_user/mypage'=> 'end_users#show', as: 'mypage_end_user'
   get '/about' => 'abouts#about', as: 'about'
 
 

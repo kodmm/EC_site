@@ -1,16 +1,16 @@
-<<h1>マイページ</h1>
+<h1>マイページ</h1>
 <div class="container">
     <div class="row">
-        <div class="col-md-5 col-md-offset-1 flex">
+        <div class="col-md-5 col-md-offset-2 flex">
             <h2>登録情報</h2>
-            <button type="button" class="btn btn-primary"><%= link_to "編集する", edit_end_user_path %></button>
-            <button type="button" class="btn btn-primary link_color"><%= link_to "パスワードを変更する", edit_end_user_password_path %></button>
+            <button type="button" class="btn btn-primary"><%= link_to "編集する", edit_end_users_path %></button>
+            <button type="button" class="btn btn-primary link_color"><%= link_to "パスワードを変更する", new_end_user_password_path %></button>
         </div>
         
     </div>
     <br>
     <div class="row">
-        <div class="col-md-6 col-md-offset-1">
+        <div class="col-md-6 col-md-offset-2">
         
             <table class="table">
                 <tbody>
@@ -38,6 +38,9 @@
                     </tr>
                 </tbody>
             </table>
+            <br>
+            <h2>登録情報</h2>
+           <span><button type="button" class="btn btn-primary"><%= link_to "配達先", edit_end_user_path %></button></span>
         </div>
     </div>
 </div>
