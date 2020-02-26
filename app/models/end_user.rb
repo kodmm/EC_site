@@ -4,8 +4,9 @@ class EndUser < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :cart_items, dependent: :destroy
+
   validates :name, presence: true, length:{minimum: 2, maximum: 20}
-  validates :surname, presence: true
   validates :kana_surname, presence: true
   validates :kana_name, presence: true
   validates :postal_code, presence: true
