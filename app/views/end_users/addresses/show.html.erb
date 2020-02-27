@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-1">
+            <h2>配送先/登録一覧</h2>
+            <%= form_for(@address) do |f| %>
+            <table>
+                <tbody>
+                    <tr>
+                         <td><%= f.label :postalcode, "郵便番号" %></td>
+                          <td><%= f.email_field :postalcode, autofocus: true, autocomplete: "postalcode", placeholder: "郵便番号" %></td>
+                    </tr>
+                    <tr>
+                        <td><%= f.label :street_address, "住所" %></td>
+                        <td><%= f.text_field :street_address, autofocus: true, autocomplete: "street_address", placeholder: "住所" %></td>
+                    </tr>　
+                    <tr>
+                       <td><%= f.label :address, "宛名" %></td>
+                        <td><%= f.text_field :address, autofocus: true, autocomplete: "address", placeholder: "宛名" %></td>
+                    </tr>
+                </tbody>
+            </table>
+            <% end %>
+
