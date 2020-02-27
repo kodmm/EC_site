@@ -23,6 +23,6 @@ class EndUsers::EndUsersController < ApplicationController
 
   private
   def end_user_params
-      params.(:end_user).permit(:email, :name, :kana_surname, :kana_name,:surname, :postal_code, :street_address, :phone_number)
+      params.require(:end_user).permit(:email, :name, :kana_surname, :kana_name,:surname, :postal_code, :street_address, :phone_number)
   end
 end
