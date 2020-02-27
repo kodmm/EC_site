@@ -3,8 +3,8 @@
     <div class="row">
         <div class="col-md-5 col-md-offset-2 flex">
             <h2>登録情報</h2>
-            <button type="button" class="btn btn-primary"><%= link_to "編集する", edit_end_users_path %></button>
-            <button type="button" class="btn btn-primary link_color"><%= link_to "パスワードを変更する", new_end_user_password_path %></button>
+            <button type="button" class="btn btn-primary"><%= link_to "編集する", edit_end_user_path %></button>
+            <button type="button" class="btn btn-primary link_color"><%= link_to "パスワードを変更する", edit_end_user_password_path %></button>
         </div>
         
     </div>
@@ -16,7 +16,7 @@
                 <tbody>
                     <tr>
                         <td>氏名</td>
-                        <td><%= current_end_user.name %></td>
+                        <td><%= current_end_user.surname %> <%= current_end_user.name %></td>
                     </tr>
                     <tr>
                         <td>カナ</td>
@@ -40,7 +40,7 @@
             </table>
             <br>
             <h2>登録情報</h2>
-           <span><button type="button" class="btn btn-primary"><%= link_to "配達先", edit_end_user_path %></button></span>
+           <span><button type="button" class="btn btn-primary"><%= link_to "配達先", end_users_addresses_path(current_end_user.id) %></button></span>
         </div>
     </div>
 </div>

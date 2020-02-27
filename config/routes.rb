@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :admins do
     get 'top/top'
   end
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   namespace :end_users do
+    resources :addresses, only:[:create, :edit, :show]
     resources :cart_items, only:[:index]
     resources :items, only:[:index, :show]
     get 'items/top'
@@ -20,7 +22,7 @@ Rails.application.routes.draw do
     get 'end_users/confirm'
   end
   scope module: :end_users do
-    resource :end_users, only:[:index, :edit, :confirm, :update]
+    resource :end_user, only:[:index, :edit, :confirm, :update]
   end
 
   root 'end_users/items#top'
