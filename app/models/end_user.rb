@@ -5,7 +5,8 @@ class EndUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :cart_items, dependent: :destroy
-
+  has_many :addresses, dependent: :destroy
+  
   validates :name, presence: true, length:{minimum: 2, maximum: 20}
   validates :kana_surname, presence: true
   validates :kana_name, presence: true
