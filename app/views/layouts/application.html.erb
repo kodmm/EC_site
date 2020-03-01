@@ -31,11 +31,15 @@
                 <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %>
             <% elsif admin_signed_in? %>
               <li class="">
-                <%= link_to "商品一覧", items_path %>
+                <%= link_to "受注一覧", "#" %>
               </li>
-              <li clas="">
-                <%= link_to "会員一覧", items_path %>
+              <li class="">
+                <%= link_to "商品登録", admins_items_path %>
               </li>
+              <li class="">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+              </li>
+
             <% else %>
               <li class="">
                 <%= link_to "ログイン", new_end_user_session_path %>

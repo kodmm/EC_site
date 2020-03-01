@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  devise_for :admins, controllers: {
+    sessions:      'admins/sessions',
+    passwords:     'admins/passwords',
+    registrations: 'admins/registrations'
+  }
+
   namespace :admins do
     get 'top/top'
   end
@@ -27,15 +33,12 @@ Rails.application.routes.draw do
     resource :end_user, only:[:index, :edit, :confirm, :update]
   end
 
+ 
+
   root 'end_users/items#top'
   resources :admins, only:[:show, :index, :edit]
 
 
-  devise_for :admins, controllers: {
-    sessions:      'admins/sessions',
-    passwords:     'admins/passwords',
-    registrations: 'admins/registrations'
-  }
   devise_for :end_users, controllers: {
     sessions:      'end_users/sessions',
     passwords:     'end_users/passwords',
