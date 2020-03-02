@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :genres, only:[:index, :edit]
     resources :orders, only:[:index, :new]
     resources :items, only:[:index, :new]
-    resources :end_users, only:[:index, :show]
+    resources :end_users, only:[:index, :show, :edit]
   end
 
   namespace :end_users do

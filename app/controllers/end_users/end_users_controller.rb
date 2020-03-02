@@ -12,11 +12,10 @@ class EndUsers::EndUsersController < ApplicationController
       redirect_to mypage_end_user_path
     else
       render action: :edit
+    end
   end
- 
 
-  
-  end
+ 
 
   def confirm
   end

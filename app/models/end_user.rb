@@ -1,4 +1,10 @@
 class EndUser < ApplicationRecord
+  acts_as_paranoid 
+
+  enum is_deleted: {"有効": false, "退会済": true}
+
+  
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
