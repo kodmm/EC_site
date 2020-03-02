@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :genres, only:[:index, :edit]
     resources :orders, only:[:index, :new]
     resources :items, only:[:index, :new]
-    resources :end_users, only:[:index, :show]
+    resources :end_users, only:[:index, :show, :edit, :update]
   end
 
   namespace :end_users do
@@ -25,7 +25,6 @@ Rails.application.routes.draw do
     resources :items, only:[:index, :show]
     get 'items/top'
 
-    get 'end_users/confirm'
   end
   
   scope module: :end_users do

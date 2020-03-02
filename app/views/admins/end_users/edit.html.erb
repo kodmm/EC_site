@@ -1,0 +1,53 @@
+
+<div class="container">
+<div class="row">
+    <div class="col-md-8 col-md-offset-1">
+        <h2>登録情報編集</h2>
+       
+        <%= form_for(@end_user) do |f| %>
+        <table class="table">
+            <tr>
+                <td>会員ID</td>
+                <td><%= f.id %></td>
+            </tr>
+            <tr>
+                <td>氏名</td>
+                <td><%= f.text_field :surname, autofocus: true, autocomplete: "surname", placeholder: "姓" %> <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "名" %></td>
+                
+            </tr>
+            <tr>
+                <td>カナ</td>
+                <td><%= f.text_field :kana_surname, autofocus: true, autocomplete: "kana_surname", placeholder: "カナ姓" %> <%= f.text_field :kana_name, autofocus: true, autocomplete: "kana_name", placeholder: "カナ名" %></td>
+            </tr>
+            <tr>
+                <td>郵便番号</td>
+                <td><%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder: "郵便番号" %></td>
+            </tr>
+            <tr>
+                <td>住所</td>
+                <td><%= f.text_field :street_address, autofocus: true, autocomplete: "street_address", placeholder: "住所" %></td>
+            </tr>
+            <tr>
+                <td>電話番号</td>
+                <td><%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "電話番号" %></td>
+            </tr>
+            <tr>
+                <td>メールアドレス</td>
+                <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メール" %></td>
+            </tr>
+            <tr>
+                <td>会員ステータス</td>
+                <td></td>
+            </tr>
+        </table>
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-3">
+        <%= f.submit "変更を保存する", class: "btn btn-primary" %>
+    </div>
+</div>
+<% end %>
+</div>
+                
