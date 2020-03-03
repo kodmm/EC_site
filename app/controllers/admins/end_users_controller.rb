@@ -15,14 +15,15 @@ class Admins::EndUsersController < ApplicationController
 
   def update
     end_user = EndUser.find(params[:id])
-    end_user = EndUser.find(@end_user.id)
-    if user.update(end_user_params)
-      redirect_to admins_items_path
+    if end_user.update(end_user_params)
+      redirect_to admins_end_users 
     else
       @end_user = end_user
       render action: :edit
     end
   end
+
+  
   
 
 

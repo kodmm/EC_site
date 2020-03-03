@@ -25,11 +25,12 @@ Rails.application.routes.draw do
     resources :items, only:[:index, :show]
     get 'items/top'
 
+    get 'end_users/confirm'
   end
   
   scope module: :end_users do
     resources :addresses, only:[:create, :edit, :show,:update, :destroy]
-    resource :end_user, only:[:index, :edit, :confirm, :update]
+    resource :end_user, only:[:index, :edit, :update, :destroy]
   end
 
  

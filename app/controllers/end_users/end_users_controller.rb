@@ -7,15 +7,20 @@ class EndUsers::EndUsersController < ApplicationController
   end
 
   def update
-    user = EndUser.find(current_end_user.id)
-    if user.update(end_user_params)
+    end_user = EndUser.find(current_end_user.id)
+    if end_user.update(end_user_params)
       redirect_to mypage_end_user_path
     else
       render action: :edit
     end
   end
 
- 
+ def destroy
+  end_user = current_end_user
+  end_user.is_deleted = true
+  end_user.destroy
+  redirect_to root_path
+ end
 
   def confirm
   end

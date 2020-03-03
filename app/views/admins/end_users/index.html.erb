@@ -19,7 +19,7 @@
                         
                     <tr>
                         <td><%= end_user.id %></td>
-                        <td><%= link_to end_user.surname + " " + end_user.name, admins_end_user_path(end_user.id) %></td>
+                        <td><%= link_to "#{end_user.surname } #{end_user.name}", admins_end_user_path(end_user.id) %></td>
                         <td><%= end_user.email %></td>
                         <td><%= end_user.is_deleted %></td>
                     </tr>
