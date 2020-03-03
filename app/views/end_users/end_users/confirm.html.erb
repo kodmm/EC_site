@@ -7,5 +7,5 @@
             退会する場合は、「退会する」をクリックしてください</p>
             <br>
             <span><button class="btn btn-primary"><%= link_to "退会しない", edit_end_user_path %></button></span>
-            <span><button class="btn btn-danger"><%= link_to "退会する", end_user_registration_path, method: :delete, data: {confirm: '削除しますか'} %></button></span>
+            <span><button class="btn btn-danger"><%= link_to "退会する", end_user_path, method: :delete, data: {confirm: '削除しますか'} %></button></span>
         </div>

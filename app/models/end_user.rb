@@ -1,7 +1,7 @@
 class EndUser < ApplicationRecord
   acts_as_paranoid 
 
-  enum is_deleted: {"有効": false, "退会済": true}
+  enum is_deleted: {"退会済": true, "有効": false}
 
   
 
