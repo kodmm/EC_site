@@ -15,13 +15,6 @@ class EndUsers::EndUsersController < ApplicationController
     end
   end
 
- def destroy
-  end_user = current_end_user
-  end_user.is_deleted = true
-  end_user.destroy
-  redirect_to root_path
- end
-
   def confirm
   end
 

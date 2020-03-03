@@ -21,7 +21,11 @@
                         <td><%= end_user.id %></td>
                         <td><%= link_to "#{end_user.surname } #{end_user.name}", admins_end_user_path(end_user.id) %></td>
                         <td><%= end_user.email %></td>
-                        <td><%= end_user.is_deleted %></td>
+                        <% if end_user.deleted_at != nil %>
+                         <td>退会済み</td>
+                        <% else %>
+                            <td>有効</td>
+                        <% end %>
                     </tr>
                     <% end %>
                 </tbody>

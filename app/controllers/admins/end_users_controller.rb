@@ -23,10 +23,6 @@ class Admins::EndUsersController < ApplicationController
     end
   end
 
-  
-  
-
-
 
   private
   def end_user_params

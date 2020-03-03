@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   
   scope module: :end_users do
     resources :addresses, only:[:create, :edit, :show,:update, :destroy]
-    resource :end_user, only:[:index, :edit, :update, :destroy]
+    resource :end_user, only:[:index, :edit, :update]
   end
 
  
