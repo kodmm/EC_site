@@ -20,7 +20,7 @@
                 </tr>
                 <tr>
                     <td>ジャンル</td>
-                    <td><%= item.select :genre_id, Genre.statuses.keys, :prompt => "選択してください" %></td>
+                    <td><%= item.select :genre_id, Genre.names.keys, :prompt => "選択してください" %></td>
                 </tr>
                 <tr>
                     <td>税込価格</td>

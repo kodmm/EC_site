@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2020_03_04_051825) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    tz1.string "name"
+    t.string "name"
     t.string "surname"
     t.string "kana_surname"
     t.string "kana_name"
