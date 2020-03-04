@@ -1,10 +1,12 @@
 class Admins::ItemsController < ApplicationController
   def index
-    @item = Item.new
+    @items = Item.all
+  
   end
 
   def new
     @item = Item.new
+    @genres = Genre.all
   end
 
   def create

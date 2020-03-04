@@ -4,12 +4,14 @@
     </div>
     <div class="row">
         <div class="col-md-4 col-md-offset-1">
+        <%= form_for(@item, url: admins_items_path) do |item| %>
             <%= attachment_image_tag @item, :image, :fill, 100, 100, format:'jpeg' %>
+            <%= item.attachment_field :image %>
         </div>
         <div class="col-md-4 col-md-offset-1">
             <table class="table">
                 <tbody>
-                <%= form_for(@item, url: admins_items_path) do |item| %>
+                
                 <tr>
                     <td>商品名</td>
                     <td><%= item.text_field :name %></td>
@@ -20,7 +22,8 @@
                 </tr>
                 <tr>
                     <td>ジャンル</td>
-                    <td><%= item.select :genre_id, Genre.names.keys, :prompt => "選択してください" %></td>
+                    <td><%= item.collection_select(:genre_id, Genre.all, :id, :name, prompt: "選択してください") %></td>
+
                 </tr>
                 <tr>
                     <td>税込価格</td>
