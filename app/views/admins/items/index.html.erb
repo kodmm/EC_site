@@ -1,3 +1,28 @@
-<p>hoge</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-1">
+            <h2>商品一覧画面</h2>
+            <table class="table">
+                <tr>
+                    <th>商品ID</th>
+                    <th>商品名</th>
+                    <th>税抜価格</th>
+                    <th>ジャンル</th>
+                    <th>ステータス</th>
+                </tr>
+                <% @items.each do |item| %>
+                <tr>
+                    <td><%= item.id %></td>
+                    <td><%= item.name %></td>
+                    <td><%= item.price %></td>
+                    <td><%= Genre.find(item.genre_id).name %></td>
+                    <td><%= item.status %></td>
+                </tr>
+                <% end %>
+            </table>
+        </div>
+    </div>
+</div>
+
 
 
