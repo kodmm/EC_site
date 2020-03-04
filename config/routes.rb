@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   get '/end_user/mypage'=> 'end_users/end_users#show', as: 'mypage_end_user'
 
   namespace :admins do
-    resources :genres, only:[:index, :edit]
+    resources :genres, only:[:index, :edit, :create]
     resources :orders, only:[:index, :new]
-    resources :items, only:[:index, :new]
+    resources :items, only:[:index, :new, :create]
     resources :end_users, only:[:index, :show, :edit, :update]
   end
 

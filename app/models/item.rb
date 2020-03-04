@@ -1,3 +1,14 @@
 class Item < ApplicationRecord
-    has_many :items, dependent: :destroy
+    enum status: {"販売中": 0, "品切れ": 1}
+    attachment :image
+    has_many :cart_items, dependent: :destroy
+    has_many :genres
+
+    validates :genre_id, presence: true
+    validates :name, presence: true
+    validates :price, presence: true
+    validates :status, presence: true
+    validates :details, presence: true
+
+
 end
