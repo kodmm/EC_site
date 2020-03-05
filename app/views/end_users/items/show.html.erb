@@ -1,2 +1,37 @@
-<h1>EndUsers::Items#show</h1>
-<p>Find me in app/views/end_users/items/show.html.erb</p>
+<div class="container">
+    <div class="row margin">
+         <div class="col-md-3 col-md-offset-1">
+            <table class="table">
+                <tr>
+                    <th>ジャンル検索</th>
+                </tr>
+                <% @genres.each do |genre| %>
+                <tr>
+                    <td><%= genre.name %><td>
+                </tr>
+                <% end %>
+            </table>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            <%= attachment_image_tag @item, :image, :fill, 250, 200, format:'jpeg', fallback: "no_image.jpg" %>
+        </div>
+        <div class="col-md-3 col-md-offset-0.5">
+            <table class="table">
+                <tbody>
+                
+                <tr>
+                    <td><%= @item.name%></td>
+                </tr>
+                <tr>
+                    <td><%= @item.details %></td>
+                </tr>
+                <tr>
+                    <td>&yen;<%= @item.price %>(税込)</td>
+                </tr>
+                <tr>
+                    <td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
