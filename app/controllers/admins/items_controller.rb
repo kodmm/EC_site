@@ -4,6 +4,11 @@ class Admins::ItemsController < ApplicationController
   
   end
 
+  def show
+    @item = Item.find(params[:id])
+    @genre = Genre.find(@item.genre_id)
+  end
+
   def new
     @item = Item.new
     @genres = Genre.all
