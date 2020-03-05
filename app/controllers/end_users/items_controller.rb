@@ -8,5 +8,8 @@ class EndUsers::ItemsController < ApplicationController
   end
 
   def show
+    @genres = Genre.all
+    @item = Item.find(params[:id])
+    @taxi = 1.10
   end
 end
