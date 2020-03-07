@@ -11,5 +11,6 @@ class EndUsers::ItemsController < ApplicationController
     @genres = Genre.all
     @item = Item.find(params[:id])
     @taxi = 1.10
+    @cart_item = CartItem.new
   end
 end
