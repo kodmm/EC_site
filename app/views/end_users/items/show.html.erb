@@ -20,7 +20,7 @@
                 <tbody>
                 
                 <tr>
-                    <td><%= @item.name%></td>
+                    <td><h3><%= @item.name%></h3></td>
                 </tr>
                 <tr>
                     <td><%= @item.details %></td>
@@ -28,9 +28,12 @@
                 <tr>
                     <td>&yen;<%= @item.price %>(税込)</td>
                 </tr>
+                <%= form_for @cart_item, url: end_users_cart_items_path do |f| %>
                 <tr>
-                    <td>
+                    <td><%= f.number_field :amount , min: "1", palceholder: "個数選択" %></td>
+                    <td><%= f.submit "カートに入れる" , class: "btn btn-primary" %></td>
                 </tr>
+                <% end %>
             </table>
         </div>
     </div>
