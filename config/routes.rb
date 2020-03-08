@@ -20,17 +20,17 @@ Rails.application.routes.draw do
   end
 
   namespace :end_users do
-    
-    resources :cart_items, only:[:index]
-    resources :items, only:[:index, :show]
     get 'items/top'
-
+   
     get 'end_users/confirm'
   end
   
   scope module: :end_users do
+    resources :cart_items, only:[:index, :create, :update, :destroy]
     resources :addresses, only:[:create, :edit, :show,:update, :destroy]
     resource :end_user, only:[:index, :edit, :update]
+    resources :items, only:[:index, :show]
+    delete '/cart_items' => 'end_users/cart_items#delete_all'
   end
 
  
