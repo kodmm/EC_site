@@ -1,14 +1,15 @@
 class EndUsers::CartItemsController < ApplicationController
   def index
-    @cart_items = CartItem.all
+    @cart_items = CartItem.all 
     
   end
 
   def create
+    binding.pry
     cart_item = CartItem.new(cart_item_params)
     cart_item.end_user_id = current_end_user.id
     cart_item.save
-    redirect_to end_users_cart_items_path
+    redirect_to cart_items_path
   end
 
   def update
@@ -18,6 +19,8 @@ class EndUsers::CartItemsController < ApplicationController
   end
 
   def destroy_all
+    CartItem.destroy_all
+    redirect_to  items_path
   end
 
 

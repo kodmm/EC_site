@@ -21,7 +21,7 @@
                         <br>
                         <%= item.name %>
                         <p>&yen;<%= item.price %></p>
-                        <%= link_to "詳細", end_users_item_path(item.id),class: "btn-sm btn-primary" %>
+                        <%= link_to "詳細",  item_path(item.id),class: "btn-sm btn-primary" %>
                     </div>
                 <% end %>
 

@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     resources :addresses, only:[:create, :edit, :show,:update, :destroy]
     resource :end_user, only:[:index, :edit, :update]
     resources :items, only:[:index, :show]
-    delete '/cart_items' => 'end_users/cart_items#delete_all'
+    delete '/cart_items' => 'cart_items#destroy_all', as: 'destroy_all'
   end
 
  
