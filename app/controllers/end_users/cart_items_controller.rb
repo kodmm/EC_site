@@ -5,7 +5,7 @@ class EndUsers::CartItemsController < ApplicationController
   end
 
   def create
-    binding.pry
+    
     cart_item = CartItem.new(cart_item_params)
     cart_item.end_user_id = current_end_user.id
     cart_item.save
@@ -13,6 +13,11 @@ class EndUsers::CartItemsController < ApplicationController
   end
 
   def update
+    cart_item = CartItem.new(cart_item_params)
+    
+    binding.pry
+    cart_item.update
+    redirect_to cart_items_path
   end
   
   def destroy
