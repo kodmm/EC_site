@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',
     passwords:     'admins/passwords',
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
     resources :addresses, only:[:create, :edit, :show,:update, :destroy]
     resource :end_user, only:[:index, :edit, :update]
     resources :items, only:[:index, :show]
+    resources :orders, only:[:new, :index, :show]
     delete '/cart_items' => 'cart_items#destroy_all', as: 'destroy_all'
   end
 
