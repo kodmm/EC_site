@@ -31,9 +31,9 @@ Rails.application.routes.draw do
     resources :addresses, only:[:create, :edit, :show,:update, :destroy]
     resource :end_user, only:[:index, :edit, :update]
     resources :items, only:[:index, :show]
-    resources :orders, only:[:new, :index, :show]
+    resources :orders, only:[:new, :index, :show, :create]
     delete '/cart_items' => 'cart_items#destroy_all', as: 'destroy_all'
-    get '/orders/confirm' => 'orders#confirm', as: 'confirm'
+    get '/order/confirm' => 'orders#confirm', as: 'input_confirm'
   end
 
  

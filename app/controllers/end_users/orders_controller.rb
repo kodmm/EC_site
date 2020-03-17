@@ -7,19 +7,28 @@ class EndUsers::OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @end_user = EndUser.find(current_end_user.id)
   end
 
   def confirm
-    session[:order] = Order.new(orderexam_params)
-    session[:order][:end_user_id] = current_end_user.id
     @order = session[:order]
+    @total_price = 0
+    @prices = 0
+    current_end_user.cart_items.each do |cart_item|
+      price = 0
+      price = cart_item.item.price * cart_item.amount
+      @prices = @prices + cart_item.item.price
+      @total_price = @total_price + price
+    end
+    @prices = @prices * 1.10
+    @total_price = @total_price * 1.10
 
   end
 
   def create
     session[:order] = Order.new(orderexam_params)
     session[:order][:end_user_id] = current_end_user.id
-    redirect_to items_ppat
+    redirect_to input_confirm_path
   end
 
   private
