@@ -19,7 +19,7 @@
           <ul class="nav navbar-nav navbar-right">
             <% if end_user_signed_in? %>
               <li class="">
-                <%= link_to "Cart", end_users_cart_items_path %>
+                <%= link_to "Cart", cart_items_path %>
               </li>
               <li class="">
                 <%= link_to "Mypage",mypage_end_user_path %>
@@ -34,7 +34,7 @@
                 <%= link_to "受注一覧", "#" %>
               </li>
               <li class="">
-                <%= link_to "商品登録", admins_items_path %>
+                <%= link_to "商品登録", new_admins_item_path %>
               </li>
               <li class="">
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>

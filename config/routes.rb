@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',
     passwords:     'admins/passwords',
@@ -13,24 +14,26 @@ Rails.application.routes.draw do
   get '/end_user/mypage'=> 'end_users/end_users#show', as: 'mypage_end_user'
 
   namespace :admins do
-    resources :genres, only:[:index, :edit]
+    resources :genres, only:[:index, :edit, :create]
     resources :orders, only:[:index, :new]
-    resources :items, only:[:index, :new]
-    resources :end_users, only:[:index, :show]
+    resources :items, only:[:index, :new, :create, :show]
+    resources :end_users, only:[:index, :show, :edit, :update]
   end
 
   namespace :end_users do
-    
-    resources :cart_items, only:[:index]
-    resources :items, only:[:index, :show]
     get 'items/top'
-
+   
     get 'end_users/confirm'
   end
   
   scope module: :end_users do
+    resources :cart_items, only:[:index, :create, :update, :destroy]
     resources :addresses, only:[:create, :edit, :show,:update, :destroy]
-    resource :end_user, only:[:index, :edit, :confirm, :update]
+    resource :end_user, only:[:index, :edit, :update]
+    resources :items, only:[:index, :show]
+    resources :orders, only:[:new, :index, :show, :create]
+    delete '/cart_items' => 'cart_items#destroy_all', as: 'destroy_all'
+    get '/order/confirm' => 'orders#confirm', as: 'input_confirm'
   end
 
  

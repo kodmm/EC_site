@@ -1,2 +1,39 @@
-<h1>EndUsers::Items#index</h1>
-<p>Find me in app/views/end_users/items/index.html.erb</p>
+<div class="container">
+     <div class="row">
+        <div class="col-md-12">
+            <p>検索</p>
+            <%= form_tag(items_path, :method => 'get', local: true) do %>
+                <%= text_field_tag :name %>
+                <%= submit_tag 'Search' %>
+            <% end %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-md-offset-1">
+            <table class="table">
+                <tr>
+                    <th>ジャンル検索</th>
+                </tr>
+                <% @genres.each do |genre| %>
+                <tr>
+                    <td><%= genre.name %><td>
+                </tr>
+                <% end %>
+            </table>
+        </div>
+        <div class="col-md-7 col-md-offset-1">
+            <h2>ケーキ</h2><p>(全<%= @searches.count %>件）</p>
+            <div class="flex">
+                <% @searches.each do |item| %>
+                    <div class="flex-child">
+                        <%= attachment_image_tag item, :image, :fill, 150, 100, format: 'jpeg', class: "profile-img", fallback: "no_image.jpg" %>
+                        <br>
+                        <%= item.name %>
+                        <p>&yen;<%= item.price %></p>
+                        <%= link_to "詳細",  item_path(item.id),class: "btn-sm btn-primary" %>
+                    </div>
+                <% end %>
+
+            </div>
+    </div>
+</div>

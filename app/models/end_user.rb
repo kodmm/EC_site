@@ -1,4 +1,10 @@
 class EndUser < ApplicationRecord
+  acts_as_paranoid 
+
+  enum is_deleted: {"退会済": true, "有効": false}
+
+  
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -6,7 +12,8 @@ class EndUser < ApplicationRecord
 
   has_many :cart_items, dependent: :destroy
   has_many :addresses, dependent: :destroy
-  
+  has_many :orders, dependent: :destroy
+
   validates :name, presence: true, length:{minimum: 2, maximum: 20}
   validates :kana_surname, presence: true
   validates :kana_name, presence: true
