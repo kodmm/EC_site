@@ -4,5 +4,4 @@ class Order < ApplicationRecord
 
     validates :end_user_id, presence: true
     validates :payment, presence: true
-    validates :strret_address, presence: true
 end

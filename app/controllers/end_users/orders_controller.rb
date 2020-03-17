@@ -7,12 +7,21 @@ class EndUsers::OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @end_user = current_end_user
+    @end_user = EndUser.find(current_end_user.id)
   end
 
   def confirm
     @order = session[:order]
-    binding.pry
+    @total_price = 0
+    @prices = 0
+    current_end_user.cart_items.each do |cart_item|
+      price = 0
+      price = cart_item.item.price * cart_item.amount
+      @prices = @prices + cart_item.item.price
+      @total_price = @total_price + price
+    end
+    @prices = @prices * 1.10
+    @total_price = @total_price * 1.10
 
   end
 
