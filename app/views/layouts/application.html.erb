@@ -31,7 +31,7 @@
                 <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %>
             <% elsif admin_signed_in? %>
               <li class="">
-                <%= link_to "受注一覧", "#" %>
+                <%= link_to "受注一覧", admins_orders_path %>
               </li>
               <li class="">
                 <%= link_to "商品登録", new_admins_item_path %>

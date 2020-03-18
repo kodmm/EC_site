@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   namespace :admins do
     resources :genres, only:[:index, :edit, :create]
-    resources :orders, only:[:index, :new]
+    resources :orders, only:[:index, :show, :update]
     resources :items, only:[:index, :new, :create, :show]
     resources :end_users, only:[:index, :show, :edit, :update]
   end
@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     resources :orders, only:[:new, :index, :show, :create]
     delete '/cart_items' => 'cart_items#destroy_all', as: 'destroy_all'
     get '/order/confirm' => 'orders#confirm', as: 'input_confirm'
+    post '/order/confirm' => 'orders#examcreate', as: 'input_create'
+    get '/order/complete' => 'orders#complete', as: 'complete'
   end
 
  
