@@ -9,10 +9,9 @@ class Admins::OrdersController < ApplicationController
   end
 
   def update
-    address = Address.find(params[:id])
-    address.update(order_params)
-    binding.pry
-    redirect_to admins_order_path(address.id)
+    order = Order.find(params[:id])
+    order.update(order_params)
+    redirect_to admins_order_path(order.id)
   end
 
   private
