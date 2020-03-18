@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 2020_03_12_092122) do
     t.integer "postage"
     t.string "address"
     t.string "street_address"
+    t.integer "address_btn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
