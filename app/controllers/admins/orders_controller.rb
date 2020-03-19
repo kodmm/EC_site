@@ -1,6 +1,6 @@
 class Admins::OrdersController < ApplicationController
   def index
-    @orders = Order.all 
+    @orders = Order.all
   end
 
   def show
@@ -10,6 +10,7 @@ class Admins::OrdersController < ApplicationController
 
   def update
     order = Order.find(params[:id])
+    binding.pry
     order.update(order_params)
     redirect_to admins_order_path(order.id)
   end

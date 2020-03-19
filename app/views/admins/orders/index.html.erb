@@ -13,7 +13,7 @@
             <% @orders.each do |order| %>
                 <tr>
                     <td><%= link_to order.created_at, admins_order_path(order.id) %></td>
-                    <td><%= EndUser.find(order.end_user.id).name %></td>
+                    <td><%= EndUser.with_deleted.find(order.end_user_id).name %></td>
                     <td><%= order.order_status %></td>
                 </tr>
             <% end %>
