@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <table class="table">
+                <tr>
+                    <th>購入者</th>
+                    <td><%= @order.address %></td>
+                </tr>
+                <tr>
+                    <th rowspan="2">配送先</th>
+                    <td>〒<%= @order.postal_code %> <%= @order.street_address %></td>
+                </tr>
+                <tr>
+                    <td><%= @order.address %>
+                </tr>
+                <tr>
+                    <th>注文ステータス</th>
+                    <%= form_for(@order, url: admins_order_path, method: :patch) do |f| %>
+                    <td><%= f.select(:order_status, Order.order_statuses.keys.to_a) %> <%= f.submit "更新", class:"btn btn-sm btn-primary" %>
+                    </td>
+                    <% end %>
+                </tr>
+
+            </table>
+
+        </div>
+    </div>
+</div>

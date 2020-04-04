@@ -1,25 +1,50 @@
 <div class="container">
+    <%= form_for(@order, url: input_create_path, method: :post) do |f| %>
     <div class="row">
         <div class="col-md-8 col-md-offset-1">
             <h4>購入情報入力</h4>
-            <%= form_for(@order) do |f| %>
+            
             <h3>支払い方法</h3>
             <label><%= f.radio_button :payment, "クレジットカード" %>クレジットカード</label>
             <br>
             <label><%= f.radio_button :payment, "銀行振込" %>銀行振込</label>
 
             <h3>お届け先</h3>
-            <label><%= f.radio_button :street_address, @end_user.street_address %>ご自身の住所</label>
-            <%= current_end_user.postal_code && current_end_user.street_address %>
+            <label><%= f.radio_button :address_btn, 1 %>ご自身の住所</label>
+            <%= current_end_user.street_address %>
+            <%= current_end_user.postal_code %>
+            <%= current_end_user.name %>
             <br>
-            <label>登録済住所から選択</label>
+            <label><%= f.radio_button :address_btn, 2 %>登録済住所から選択</label>
             <%= f.collection_select(:street_address, current_end_user.addresses.all, :street_address, :street_address, prompt: "住所を選択してください") %>
-            <label>新しいお届け先</label>
-            <div class="col-md-4 col-md-offset-6">
-                <span><%= f.submit "登録する", class: "btn btn-primary" %></span>
-            </div>
-            <% end %>
+            <br>
+            <br>
         </div>
     </div>
+    <div class="row">
+            
+            <div class="col-md-8 col-md-offset-1">
+            <label><%= f.radio_button :address_btn, 3%>新しいお届け先</label>
+                <table class="table table-hover table-inverse">
+                <tbody>
+                    <tr>
+                         <td><%= f.label :postal_code, "郵便番号" %></td>
+                          <td><%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder: "郵便番号" %></td>
+                    </tr>
+                    <tr>
+                        <td><%= f.label :street_address, "住所" %></td>
+                        <td><%= f.text_field :street_address, autofocus: true, autocomplete: "street_address", placeholder: "住所" %></td>
+                    </tr>　
+                    <tr>
+                       <td><%= f.label :address, "宛名" %></td>
+                        <td><%= f.text_field :address, autofocus: true, autocomplete: "address", placeholder: "宛名" %></td>
+                    </tr>
+                </tbody>
+            </table>
+                <span><%= f.submit "登録する", class: "btn btn-primary" %></span>
+            </div>
+        </div>
+    </div>
+    <% end %>
 </div>
 

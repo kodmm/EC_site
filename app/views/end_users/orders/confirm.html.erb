@@ -1,1 +1,80 @@
-<p>hoge</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-md-offset-1">
+            <h3>注文情報確認</h3>
+        </div>
+    </div>
+    <div class="row">
+        
+        <div class="col-md-6 col-md-offset-1">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>商品名</th>
+                        <th>単価(税込)</th>
+                        <th>数量</th>
+                        <th>小計</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% current_end_user.cart_items.each do |cart_item| %>
+                    <tr>
+                        <td><%= attachment_image_tag cart_item.item, :image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %> <%= cart_item.item.name %></td>
+                        <td><%= (cart_item.item.price * 1.10).round %></td>
+                        
+                        <td><%= cart_item.amount %></td>
+                        
+                        <td><%= (cart_item.item.price * cart_item.amount * 1.1).round %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="col-md-3 col-md-offset-1">
+            <table class="table">
+                <tr>
+                    <th>送料</th>
+                    <th><%= @postage %></th>
+                </tr>
+                <tr>
+                    <th>商品合計</th>
+                    <th><%= (@prices).round %></th>
+                </tr>
+                <tr>
+                    <th>請求金額</th>
+                    <th><%= @total_price %></th>
+                </tr>
+
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-1">
+            <h3>支払い方法</h3>
+            <p><%= @order["payment"] %></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1">
+            <h3>お届け先</h3>
+            <h4>〒<%= @order["postal_code"] %> <%= @order["street_address"]%></h4>
+            <h4><%= @order["address"] %></h4>
+        </div>
+       
+    </div>
+        
+    <div class="row colmd-3 col-md-offset-5">
+        <%= form_for(@Order) do |f| %>
+            <%= f.hidden_field :order_status, :value => Order.order_statuses.keys[0] %>
+            <%= f.hidden_field :total_price, :value => @total_price %>
+            <%= f.hidden_field :payment, :value => @order["payment"] %>
+            <%= f.hidden_field :postal_code, :value => @order["postal_code"] %>
+            <%= f.hidden_field :postage, :value => @postage %>
+            <%= f.hidden_field :address, :value => @order["address"] %>
+            <%= f.hidden_field :street_address,:value => @order["street_address"] %>
+            <%= f.submit "購入を確定する",class: "btn btn-bg btn-primary" %>
+        <% end %>
+    </div>
+</div>
