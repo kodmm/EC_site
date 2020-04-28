@@ -1,7 +1,7 @@
 class EndUsers::ItemsController < ApplicationController
   def index
     @genres = Genre.all
-    @items = Item.all
+    @searches = Item.search(params[:name])
   end
 
   def top

@@ -1,11 +1,16 @@
 class EndUsers::CartItemsController < ApplicationController
   def index
-    @cart_items = CartItem.all 
-    
+    @total_price = 0
+    current_end_user.cart_items.each do |cart_item|
+      price = 0
+      price = cart_item.item.price * cart_item.amount
+      @total_price = @total_price + price
+    end
+    @total_price = @total_price * 1.10
   end
 
   def create
-    binding.pry
+    
     cart_item = CartItem.new(cart_item_params)
     cart_item.end_user_id = current_end_user.id
     cart_item.save
@@ -13,9 +18,15 @@ class EndUsers::CartItemsController < ApplicationController
   end
 
   def update
+    cart_item = CartItem.find(params[:id])
+    cart_item.update(cart_item_params)
+    redirect_to cart_items_path
   end
   
   def destroy
+    cart_item = CartItem.find(params[:id])
+    cart_item.destroy
+    redirect_to cart_items_path
   end
 
   def destroy_all
