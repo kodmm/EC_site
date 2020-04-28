@@ -20,15 +20,16 @@
                 </thead>
                 <tbody>
                     <% @cart_items.each do |cart_item| %>
-                    <tr>
-                        <td><%= cart_item.item.name %></td>
-                        <td><%= cart_item.item.price %></td>
-                        <%= form_for cart_item ,url: cart_item_path(cart_item.id) do |f| %>
-                        <td><%= f.number_field :amount , min: "1" %> <%= f.submit "変更", class: "btn btn-primary" %></td>
-                        <% end %>
-                        <td><%= Item.find(cart_item.item_id).price * cart_item.amount %></td>
-                        <td><%= link_to "削除する", url: cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger" %></td>
-                    </tr>
+                        <tr>
+                            <td> <%= attachment_image_tag cart_item.item, :image, :fill, 150, 100, format: 'jpeg', class: "profile-img", fallback: "no_image.jpg" %></td>
+                            <td><%= cart_item.item.name %></td>
+                            <td><%= cart_item.item.price %></td>
+                            <%= form_for cart_item ,url: cart_item_path(cart_item.id) do |f| %>
+                                <td><%= f.number_field :amount , min: "1" %> <%= f.submit "変更", class: "btn btn-primary" %></td>
+                            <% end %>
+                            <td><%= Item.find(cart_item.item_id).price * cart_item.amount %></td>
+                            <td><%= link_to "削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger" %></td>
+                        </tr>
                     <% end %>
                 </tbody>
             </table>
