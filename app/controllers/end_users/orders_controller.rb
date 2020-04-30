@@ -31,6 +31,8 @@ class EndUsers::OrdersController < ApplicationController
     order = Order.new(order_params)
     order.end_user_id = current_end_user.id
     order.save
+    session[:order].clear
+    current_end_user.cart_items.destroy_all
     redirect_to complete_path
 
   end
