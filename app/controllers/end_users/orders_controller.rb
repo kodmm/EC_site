@@ -51,8 +51,10 @@ class EndUsers::OrdersController < ApplicationController
       session[:order]["address"] = street_address[0].address
     else   
       address = Address.new(address_params)
+      
       address.end_user_id = current_end_user.id
       address.save
+      byebug
     end
     redirect_to input_confirm_path
 
