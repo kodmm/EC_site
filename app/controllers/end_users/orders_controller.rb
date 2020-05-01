@@ -46,7 +46,7 @@ class EndUsers::OrdersController < ApplicationController
       session[:order]["address"] = current_end_user.name
 
     elsif session[:order]["address_btn"] == 2
-      street_address = Address.where(street_address: session[:order]["street_address"])
+      street_address = current_end_user.addresses.where(street_address: session[:order]["street_address"])
       session[:order]["postal_code"] = street_address[0].postal_code
       session[:order]["address"] = street_address[0].address
     else   
