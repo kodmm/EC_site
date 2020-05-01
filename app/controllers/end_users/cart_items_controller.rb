@@ -10,10 +10,23 @@ class EndUsers::CartItemsController < ApplicationController
   end
 
   def create
-    
+    isExist = false
     cart_item = CartItem.new(cart_item_params)
-    cart_item.end_user_id = current_end_user.id
-    cart_item.save
+
+    current_end_user.cart_items.each do |cart|
+     
+      if cart.item_id == cart_item.item_id.to_i
+
+        sum = cart_item.amount.to_i + cart.amount
+
+        cart.update_attributes(amount: sum)
+        isExist = true
+        break
+      end
+    end
+    unless isExist
+      cart_item.save
+    end
     redirect_to cart_items_path
   end
 

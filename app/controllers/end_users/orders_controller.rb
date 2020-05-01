@@ -8,6 +8,7 @@ class EndUsers::OrdersController < ApplicationController
   def new
     @order = Order.new
     @end_user = EndUser.find(current_end_user.id)
+    @addresses = current_end_user.addresses.all
   end
 
   def confirm
@@ -46,9 +47,10 @@ class EndUsers::OrdersController < ApplicationController
       session[:order]["address"] = current_end_user.name
 
     elsif session[:order]["address_btn"] == 2
-      street_address = current_end_user.addresses.where(street_address: session[:order]["street_address"])
+      street_address = Address.where(street_address: session[:order]["address_info"])
       session[:order]["postal_code"] = street_address[0].postal_code
       session[:order]["address"] = street_address[0].address
+
     else   
       address = Address.new(address_params)
       
@@ -66,7 +68,7 @@ class EndUsers::OrdersController < ApplicationController
 
   private
     def orderexam_params
-      params.require(:order).permit(:end_user_id, :address_btn, :payment, :street_address, :postal_code, :address)
+      params.require(:order).permit(:end_user_id, :address_btn, :payment, :street_address, :postal_code, :address, :address_info)
     end
     def address_params
       params.require(:order).permit(:end_user_id, :street_address, :postal_code, :address)
