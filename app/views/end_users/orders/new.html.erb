@@ -13,9 +13,8 @@
             <%= current_end_user.street_address %>
             <%= current_end_user.postal_code %>
             <%= current_end_user.name %>
-            <br>
             <label><%= f.radio_button :address_btn, 2 %>登録済住所から選択</label>
-            <%= f.collection_select(:street_address, current_end_user.addresses.all, :street_address, :street_address, prompt: "住所を選択してください") %>
+            <%= f.collection_select(:address_info, current_end_user.addresses.all, :street_address, :street_address, prompt: "住所を選択してください") %>
             <br>
             <br>
         </div>
