@@ -1,8 +1,9 @@
 <div class="container">
+    <%= form_for(@order, url: input_create_path, method: :post) do |f| %>
     <div class="row">
         <div class="col-md-8 col-md-offset-1">
             <h4>購入情報入力</h4>
-            <%= form_for(@order, url: input_create_path, method: :post) do |f| %>
+            
             <h3>支払い方法</h3>
             <label><%= f.radio_button :payment, "クレジットカード" %>クレジットカード</label>
             <br>
@@ -16,6 +17,7 @@
             <label><%= f.radio_button :address_btn, 2 %>登録済住所から選択</label>
             <%= f.collection_select(:address_info, current_end_user.addresses.all, :street_address, :street_address, prompt: "住所を選択してください") %>
             <br>
+            
             <br>
         </div>
     </div>
@@ -41,8 +43,8 @@
             </table>
                 <span><%= f.submit "登録する", class: "btn btn-primary" %></span>
             </div>
-            <% end %>
         </div>
     </div>
+    <% end %>
 </div>
 

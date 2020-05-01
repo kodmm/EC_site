@@ -32,6 +32,8 @@ class EndUsers::OrdersController < ApplicationController
     order = Order.new(order_params)
     order.end_user_id = current_end_user.id
     order.save
+    session[:order].clear
+    current_end_user.cart_items.destroy_all
     redirect_to complete_path
 
   end
@@ -46,14 +48,18 @@ class EndUsers::OrdersController < ApplicationController
 
     elsif session[:order]["address_btn"] == 2
 
+
       street_address = Address.where(street_address: session[:order]["address_info"])
+
       session[:order]["postal_code"] = street_address[0].postal_code
       session[:order]["address"] = street_address[0].address
 
     else   
       address = Address.new(address_params)
+      
       address.end_user_id = current_end_user.id
       address.save
+      byebug
     end
     redirect_to input_confirm_path
 
