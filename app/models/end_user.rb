@@ -13,6 +13,7 @@ class EndUser < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :orders
+  has_many :order_details, through: :orders, source: :order
 
   validates :name, presence: true, length:{minimum: 2, maximum: 20}
   validates :kana_surname, presence: true

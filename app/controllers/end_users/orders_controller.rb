@@ -32,6 +32,15 @@ class EndUsers::OrdersController < ApplicationController
     order = Order.new(order_params)
     order.end_user_id = current_end_user.id
     order.save
+    
+    current_end_user.cart_items.each do |cart_item|
+      order_detail = OrderDetail.new
+      order_detail.item_id = cart_item.item_id
+      order_detail.price = cart_item.item.price
+      order_detail.amount = cart_item.amount
+      order_detail.order_id = order.id
+      order_detail.save
+    end
     session[:order].clear
     current_end_user.cart_items.destroy_all
     redirect_to complete_path
@@ -57,7 +66,7 @@ class EndUsers::OrdersController < ApplicationController
       
       address.end_user_id = current_end_user.id
       address.save
-      byebug
+  
     end
     redirect_to input_confirm_path
 
@@ -77,5 +86,7 @@ class EndUsers::OrdersController < ApplicationController
     def order_params 
       params.require(:order).permit(:end_user_id, :order_status, :total_price, :payment, :postal_code, :postage, :address, :street_address)
     end
+
+    
 
 end
