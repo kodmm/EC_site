@@ -3,6 +3,7 @@ class EndUsers::OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
   end
 
   def new
@@ -19,12 +20,11 @@ class EndUsers::OrdersController < ApplicationController
     current_end_user.cart_items.each do |cart_item|
       price = 0
       price = cart_item.item.price * cart_item.amount
-      @prices = @prices + cart_item.item.price
       @total_price = @total_price + price
     end
     @prices = @prices * 1.10
     @total_price = @total_price * 1.10  
-    @total_price = (@total_price + @postage).round
+    @total_price = @total_price.round
     @Order = Order.new
   end
 
@@ -39,6 +39,7 @@ class EndUsers::OrdersController < ApplicationController
       order_detail.price = cart_item.item.price
       order_detail.amount = cart_item.amount
       order_detail.order_id = order.id
+      order_detail.production_status = OrderDetail.production_statuses.keys[0]
       order_detail.save
     end
     session[:order].clear
