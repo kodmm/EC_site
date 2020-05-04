@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :orders, only:[:index, :show, :update]
     resources :items, only:[:index, :new, :create, :show]
     resources :end_users, only:[:index, :show, :edit, :update]
+    resources :order_details, only:[:update]
   end
 
   namespace :end_users do
