@@ -39,11 +39,11 @@
                 </tr>
                 <tr>
                     <th>商品合計</th>
-                    <th><%= (@prices).round %></th>
+                    <th><%= @total_price%></th>
                 </tr>
                 <tr>
                     <th>請求金額</th>
-                    <th><%= @total_price %></th>
+                    <th><%= (@total_price + @postage) %></th>
                 </tr>
 
             </table>
