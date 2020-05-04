@@ -41,6 +41,7 @@ class EndUsers::OrdersController < ApplicationController
   def examcreate
     session[:order] = Order.new(orderexam_params)
     session[:order][:end_user_id] = current_end_user.id
+    byebug
     if session[:order]["address_btn"] == 1
       session[:order]["postal_code"] = current_end_user.postal_code
       session[:order]["street_address"] = current_end_user.street_address
