@@ -23,7 +23,7 @@ class EndUsers::OrdersController < ApplicationController
       @total_price = @total_price + price
     end
     @prices = @prices * 1.10
-    @total_price = @total_price * 1.10  
+    @total_price = @total_price * 1.10
     @total_price = @total_price.round
     @Order = Order.new
   end
