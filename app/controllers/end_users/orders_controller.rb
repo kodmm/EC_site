@@ -1,4 +1,6 @@
 class EndUsers::OrdersController < ApplicationController
+  before_action :authenticate_end_user!
+  before_action :cart_item_check, only: [:new, :confirm, :create]
   def index
   end
 
@@ -23,7 +25,7 @@ class EndUsers::OrdersController < ApplicationController
       @total_price = @total_price + price
     end
     @prices = @prices * 1.10
-    @total_price = @total_price * 1.10  
+    @total_price = @total_price * 1.10
     @total_price = @total_price.round
     @Order = Order.new
   end
@@ -88,6 +90,11 @@ class EndUsers::OrdersController < ApplicationController
       params.require(:order).permit(:end_user_id, :order_status, :total_price, :payment, :postal_code, :postage, :address, :street_address)
     end
 
-    
+    def cart_item_check
+      cart_item = current_end_user.cart_items
+      unless cart_item.exists?
+        redirect_to items_path
+      end
+    end
 
 end

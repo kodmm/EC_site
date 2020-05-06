@@ -32,7 +32,6 @@
                         <tr>
                             <td><%= f.hidden_field :item_id, :value => @item.id %></td>
                             <td><%= f.number_field :amount , min: "1", placeholder: "個数選択" %></td>
-                            <td><%= f.hidden_field :end_user_id, :value => current_end_user.id %></td>
                             <td><%= f.submit "カートに入れる" , class: "btn btn-primary" %></td>
                         </tr>
                     <% end %>
