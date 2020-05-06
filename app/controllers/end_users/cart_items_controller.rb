@@ -19,7 +19,7 @@ class EndUsers::CartItemsController < ApplicationController
 
         sum = cart_item.amount.to_i + cart.amount
 
-        cart.update_attributes(amount: sum)
+        cart.update(amount: sum)
         isExist = true
         break
       end
