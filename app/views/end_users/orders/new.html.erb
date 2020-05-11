@@ -17,7 +17,7 @@
             <br>
             <br>
             <label><%= radio_button_tag :address_btn, 2 %>登録済住所から選択</label>
-            <%= f.collection_select(:address_info, current_end_user.addresses.all, :street_address, :street_address, prompt: "住所を選択してください") %>
+            <%= f.collection_select(:address_info, current_end_user.addresses.all, :id, :full_address, prompt: "住所を選択してください") %>
             <br>
             
             <br>

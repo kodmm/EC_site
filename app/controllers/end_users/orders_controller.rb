@@ -51,15 +51,16 @@ class EndUsers::OrdersController < ApplicationController
   end
 
   def examcreate
+    byebug
     session[:order] = Order.new(orderexam_params)
     session[:order][:end_user_id] = current_end_user.id
-    if params[:address_btn] == 1
+    if params[:address_btn].to_i == 1
       session[:order]["postal_code"] = current_end_user.postal_code
       session[:order]["street_address"] = current_end_user.street_address
       session[:order]["address"] = current_end_user.name
 
-    elsif params[:address_btn] == 2
-      street_address = current_end_user.addresses.find_by(street_address: params[:address_btn])
+    elsif params[:address_btn].to_i == 2
+      street_address = current_end_user.addresses.find(params[:address_btn].to_i)
       session[:order]["postal_code"] = street_address.postal_code
       session[:order]["address"] = street_address.address
       session[:order]["street_address"] = street_address.street_address
@@ -81,7 +82,7 @@ class EndUsers::OrdersController < ApplicationController
 
   private
     def orderexam_params
-      params.require(:order).permit(:end_user_id, :payment, :street_address, :postal_code, :address)
+      params.require(:order).permit(:end_user_id, :payment, :street_address, :postal_code, :address, :address_info)
     end
     def address_params
       params.require(:order).permit(:end_user_id, :street_address, :postal_code, :address)
