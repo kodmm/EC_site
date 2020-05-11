@@ -36,12 +36,12 @@ class EndUsers::OrdersController < ApplicationController
     order.save
     
     current_end_user.cart_items.each do |cart_item|
-      order_detail = OrderDetail.new
-      order_detail.item_id = cart_item.item_id
-      order_detail.price = cart_item.item.price
-      order_detail.amount = cart_item.amount
-      order_detail.order_id = order.id
-      order_detail.production_status = OrderDetail.production_statuses.keys[0]
+      order_detail = OrderDetail.new(
+        item_id: cart_item.item_id,
+        order_id: order.id,
+        amount: cart_item.amount,
+        price: cart_item.item.price
+      )
       order_detail.save
     end
     session[:order].clear
@@ -51,15 +51,16 @@ class EndUsers::OrdersController < ApplicationController
   end
 
   def examcreate
+    byebug
     session[:order] = Order.new(orderexam_params)
     session[:order][:end_user_id] = current_end_user.id
-    if session[:order]["address_btn"] == 1
+    if params[:address_btn].to_i == 1
       session[:order]["postal_code"] = current_end_user.postal_code
       session[:order]["street_address"] = current_end_user.street_address
       session[:order]["address"] = current_end_user.name
 
-    elsif session[:order]["address_btn"] == 2
-      street_address = current_end_user.addresses.find_by(street_address: session[:order]["address_info"])
+    elsif params[:address_btn].to_i == 2
+      street_address = current_end_user.addresses.find(params[:address_btn].to_i)
       session[:order]["postal_code"] = street_address.postal_code
       session[:order]["address"] = street_address.address
       session[:order]["street_address"] = street_address.street_address
@@ -81,13 +82,13 @@ class EndUsers::OrdersController < ApplicationController
 
   private
     def orderexam_params
-      params.require(:order).permit(:end_user_id, :address_btn, :payment, :street_address, :postal_code, :address, :address_info)
+      params.require(:order).permit(:end_user_id, :payment, :street_address, :postal_code, :address, :address_info)
     end
     def address_params
       params.require(:order).permit(:end_user_id, :street_address, :postal_code, :address)
     end
     def order_params 
-      params.require(:order).permit(:end_user_id, :order_status, :total_price, :payment, :postal_code, :postage, :address, :street_address)
+      params.require(:order).permit(:end_user_id, :total_price, :payment, :postal_code, :postage, :address, :street_address)
     end
 
     def cart_item_check

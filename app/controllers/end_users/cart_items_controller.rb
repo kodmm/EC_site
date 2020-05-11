@@ -11,21 +11,13 @@ class EndUsers::CartItemsController < ApplicationController
   end
 
   def create
-    isExist = false
     cart_item = CartItem.new(cart_item_params)
     cart_item.end_user_id = current_end_user.id
-    current_end_user.cart_items.each do |cart|
-     
-      if cart.item_id == cart_item.item_id.to_i
 
-        sum = cart_item.amount.to_i + cart.amount
-
-        cart.update_attributes(amount: sum)
-        isExist = true
-        break
-      end
-    end
-    unless isExist
+    if current_end_user.cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
+     cart_item = current_end_user.cart_items.find_by(item_id: params[:cart_item][:item_id])
+     cart_item.update(amount: cart_item.amount = cart_item.amount + params[:cart_item][:amount].to_i)
+    else
       cart_item.save
     end
     redirect_to cart_items_path
@@ -40,7 +32,7 @@ class EndUsers::CartItemsController < ApplicationController
   def destroy
     cart_item = CartItem.find(params[:id])
     cart_item.destroy
-    redirect_to cart_items_path
+    redirect_to request.referer
   end
 
   def destroy_all

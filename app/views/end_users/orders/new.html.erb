@@ -10,14 +10,14 @@
             <label><%= f.radio_button :payment, "銀行振込" %>銀行振込</label>
 
             <h3>お届け先</h3>
-            <label><%= f.radio_button :address_btn, 1 %>ご自身の住所</label>
+            <label><%= radio_button_tag :address_btn, 1 %>ご自身の住所</label>
             <%= current_end_user.street_address %>
             <%= current_end_user.postal_code %>
             <%= current_end_user.name %>
             <br>
             <br>
-            <label><%= f.radio_button :address_btn, 2 %>登録済住所から選択</label>
-            <%= f.collection_select(:address_info, current_end_user.addresses.all, :street_address, :street_address, prompt: "住所を選択してください") %>
+            <label><%= radio_button_tag :address_btn, 2 %>登録済住所から選択</label>
+            <%= f.collection_select(:address_info, current_end_user.addresses.all, :id, :full_address, prompt: "住所を選択してください") %>
             <br>
             
             <br>
@@ -26,7 +26,7 @@
     <div class="row">
             
             <div class="col-md-8 col-md-offset-1">
-            <label><%= f.radio_button :address_btn, 3%>新しいお届け先</label>
+            <label><%= radio_button_tag :address_btn, 3%>新しいお届け先</label>
                 <table class="table table-hover table-inverse">
                 <tbody>
                     <tr>
