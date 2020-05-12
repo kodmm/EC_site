@@ -34,7 +34,10 @@ class EndUsers::OrdersController < ApplicationController
     order = Order.new(order_params)
     order.end_user_id = current_end_user.id
     order.save
-    
+
+    session[:order].clear
+
+
     current_end_user.cart_items.each do |cart_item|
       order_detail = OrderDetail.new(
         item_id: cart_item.item_id,
@@ -44,35 +47,57 @@ class EndUsers::OrdersController < ApplicationController
       )
       order_detail.save
     end
-    session[:order].clear
+    #addressの追加
+  
+    unless session[:address].blank?
+    
+      Address.create(session[:address])
+    end
+    
+    session[:address].clear
+
     current_end_user.cart_items.destroy_all
     redirect_to complete_path
 
   end
 
   def examcreate
-    byebug
     session[:order] = Order.new(orderexam_params)
     session[:order][:end_user_id] = current_end_user.id
     if params[:address_btn].to_i == 1
       session[:order]["postal_code"] = current_end_user.postal_code
       session[:order]["street_address"] = current_end_user.street_address
       session[:order]["address"] = current_end_user.name
+      redirect_to input_confirm_path
 
     elsif params[:address_btn].to_i == 2
-      street_address = current_end_user.addresses.find(params[:address_btn].to_i)
-      session[:order]["postal_code"] = street_address.postal_code
-      session[:order]["address"] = street_address.address
-      session[:order]["street_address"] = street_address.street_address
+      if params[:order][:address_info].blank?
+        @order = Order.new
+        @end_user = EndUser.find(current_end_user.id)
+        @addresses = current_end_user.addresses.all
+        render :new and return
+      else
+        street_address = current_end_user.addresses.find(params[:order][:address_info].to_i)
+        session[:order]["postal_code"] = street_address.postal_code
+        session[:order]["address"] = street_address.address
+        session[:order]["street_address"] = street_address.street_address
+        redirect_to input_confirm_path
+      end
       
-    else   
-      address = Address.new(address_params)
-      
-      address.end_user_id = current_end_user.id
-      address.save
-  
+    elsif params[:address_btn].to_i == 3
+      if params[:order]["postal_code"].blank? || params[:order]["address"].blank? || params[:order]["street_address"].blank?
+        @order = Order.new
+        @end_user = EndUser.find(current_end_user.id)
+        @addresses = current_end_user.addresses.all
+        render :new and return
+      else    
+        session[:address] = Address.new(address_params)
+        session[:address][:end_user_id] = current_end_user.id
+        redirect_to input_confirm_path
+      end 
+    else    
+      redirect_to request.referer
     end
-    redirect_to input_confirm_path
 
   end
 
@@ -82,13 +107,13 @@ class EndUsers::OrdersController < ApplicationController
 
   private
     def orderexam_params
-      params.require(:order).permit(:end_user_id, :payment, :street_address, :postal_code, :address, :address_info)
+      params.require(:order).permit(:payment, :street_address, :postal_code, :address, :address_info)
     end
     def address_params
-      params.require(:order).permit(:end_user_id, :street_address, :postal_code, :address)
+      params.require(:order).permit(:street_address, :postal_code, :address)
     end
-    def order_params 
-      params.require(:order).permit(:end_user_id, :total_price, :payment, :postal_code, :postage, :address, :street_address)
+    def order_params
+      params.require(:order).permit(:total_price, :payment, :postal_code, :postage, :address, :street_address)
     end
 
     def cart_item_check
