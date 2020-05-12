@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   
   scope module: :end_users do
     resources :cart_items, only:[:index, :create, :update, :destroy]
-    resources :addresses, only:[:create, :edit, :show,:update, :destroy]
+    resources :addresses, only:[:create, :edit, :index,:update, :destroy]
     resource :end_user, only:[:index, :edit, :update]
     resources :items, only:[:index, :show]
     resources :orders, only:[:new, :index, :show, :create]
