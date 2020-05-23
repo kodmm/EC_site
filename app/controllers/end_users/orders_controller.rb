@@ -31,7 +31,6 @@ class EndUsers::OrdersController < ApplicationController
   end
 
   def create
-    order = Order.new(order_params)
     order.end_user_id = current_end_user.id
     order.save
 
@@ -63,6 +62,7 @@ class EndUsers::OrdersController < ApplicationController
 
   def examcreate
     session[:order] = Order.new(orderexam_params)
+
     session[:order][:end_user_id] = current_end_user.id
     if params[:address_btn].to_i == 1
       session[:order]["postal_code"] = current_end_user.postal_code
@@ -71,13 +71,13 @@ class EndUsers::OrdersController < ApplicationController
       redirect_to input_confirm_path
 
     elsif params[:address_btn].to_i == 2
-      if params[:order][:address_info].blank?
+      if params[:address_info][:address_info].blank?
         @order = Order.new
         @end_user = EndUser.find(current_end_user.id)
         @addresses = current_end_user.addresses.all
         render :new and return
       else
-        street_address = current_end_user.addresses.find(params[:order][:address_info].to_i)
+        street_address = current_end_user.addresses.find(params[:address_info][:address_info].to_i)
         session[:order]["postal_code"] = street_address.postal_code
         session[:order]["address"] = street_address.address
         session[:order]["street_address"] = street_address.street_address
@@ -107,7 +107,7 @@ class EndUsers::OrdersController < ApplicationController
 
   private
     def orderexam_params
-      params.require(:order).permit(:payment, :street_address, :postal_code, :address, :address_info)
+      params.require(:order).permit(:payment, :street_address, :postal_code, :address)
     end
     def address_params
       params.require(:order).permit(:street_address, :postal_code, :address)
