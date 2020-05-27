@@ -3,7 +3,7 @@ class EndUser < ApplicationRecord
 
   enum is_deleted: {"退会済": true, "有効": false}
 
-  
+ 
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
