@@ -16,6 +16,7 @@
                     <td><%= item.id %></td>
                     <td><%= link_to item.name, admins_item_path(item.id) %></td>
                     <td><%= item.price %></td>
+                   
                     <td><%= Genre.find(item.genre_id).name %></td>
                     <td><%= item.status %></td>
                 </tr>
