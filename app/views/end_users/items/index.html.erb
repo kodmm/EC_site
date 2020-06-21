@@ -14,26 +14,27 @@
                 <tr>
                     <th>ジャンル検索</th>
                 </tr>
+                <tr><td><%= link_to "All", items_path %></td></tr>
                 <% @genres.each do |genre| %>
                 <tr>
-                    <td><%= genre.name %><td>
+                    <td><%= link_to genre.name, items_path(genre_id: genre.id) %></td>
                 </tr>
                 <% end %>
             </table>
         </div>
         <div class="col-md-7 col-md-offset-1">
-            <h2>ケーキ</h2><p>(全<%= @searches.count %>件）</p>
+            <h2><%= @search_result %></h2><p>(全<%= @searches.count %>件）</p>
             <div class="flex">
                 <% @searches.each do |item| %>
-                    <% if item.genre.status_before_type_cast == 0 %>
                     <div class="flex-child">
                         <%= attachment_image_tag item, :image, :fill, 150, 100, format: 'jpeg', class: "profile-img", fallback: "no_image.jpg" %>
                         <br>
                         <%= item.name %>
+                        <%= item.genre.name %>
                         <p>&yen;<%= item.price %></p>
                         <%= link_to "詳細",  item_path(item.id),class: "btn-sm btn-primary" %>
                     </div>
-                    <% end %>
+                 
                 <% end %>
 
             </div>

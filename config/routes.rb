@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   end
   
   scope module: :end_users do
+    
     resources :cart_items, only:[:index, :create, :update, :destroy]
     resources :addresses, only:[:create, :edit, :index,:update, :destroy]
     resource :end_user, only:[:index, :edit, :update]
@@ -37,6 +38,8 @@ Rails.application.routes.draw do
     get '/order/confirm' => 'orders#confirm', as: 'input_confirm'
     post '/order/confirm' => 'orders#examcreate', as: 'input_create'
     get '/order/complete' => 'orders#complete', as: 'complete'
+    get '/items/' => 'items#genres', as: 'items_genre'
+
   end
 
  
