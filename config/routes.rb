@@ -32,13 +32,14 @@ Rails.application.routes.draw do
     resources :cart_items, only:[:index, :create, :update, :destroy]
     resources :addresses, only:[:create, :edit, :index,:update, :destroy]
     resource :end_user, only:[:index, :edit, :update]
+    #get '/items/genre' => 'items#genres', as: 'items_genre'
     resources :items, only:[:index, :show]
     resources :orders, only:[:new, :index, :show, :create]
     delete '/cart_items' => 'cart_items#destroy_all', as: 'destroy_all'
     get '/order/confirm' => 'orders#confirm', as: 'input_confirm'
     post '/order/confirm' => 'orders#examcreate', as: 'input_create'
     get '/order/complete' => 'orders#complete', as: 'complete'
-    get '/items/' => 'items#genres', as: 'items_genre'
+    
 
   end
 
