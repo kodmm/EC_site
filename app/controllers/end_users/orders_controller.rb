@@ -15,8 +15,7 @@ class EndUsers::OrdersController < ApplicationController
   end
 
   def confirm
-    @order = session[:order]
-    @postage = 1000
+    
     @total_price = 0
     @prices = 0
     current_end_user.cart_items.each do |cart_item|
@@ -24,16 +23,18 @@ class EndUsers::OrdersController < ApplicationController
       price = cart_item.item.price * cart_item.amount
       @total_price = @total_price + price
     end
-    @prices = @prices * 1.10
-    @total_price = @total_price * 1.10
-    @total_price = @total_price.round
-    @Order = Order.new
+    
+    session[:order][:postage] = 1000
+
+    total_prices = ((@total_price + session[:order][:postage]) * 1.10).round
+
+    
+    session[:order][:total_price] = total_prices
   end
 
   def create
-    order.end_user_id = current_end_user.id
+    order = Order.new(session[:order])
     order.save
-
     session[:order].clear
 
 
@@ -51,9 +52,10 @@ class EndUsers::OrdersController < ApplicationController
     unless session[:address].blank?
     
       Address.create(session[:address])
+      session[:address].clear
     end
     
-    session[:address].clear
+    
 
     current_end_user.cart_items.destroy_all
     redirect_to complete_path
@@ -65,9 +67,9 @@ class EndUsers::OrdersController < ApplicationController
 
     session[:order][:end_user_id] = current_end_user.id
     if params[:address_btn].to_i == 1
-      session[:order]["postal_code"] = current_end_user.postal_code
-      session[:order]["street_address"] = current_end_user.street_address
-      session[:order]["address"] = current_end_user.name
+      session[:order][:postal_code] = current_end_user.postal_code
+      session[:order][:street_address] = current_end_user.street_address
+      session[:order][:address] = current_end_user.name
       redirect_to input_confirm_path
 
     elsif params[:address_btn].to_i == 2
@@ -78,14 +80,14 @@ class EndUsers::OrdersController < ApplicationController
         render :new and return
       else
         street_address = current_end_user.addresses.find(params[:address_info][:address_info].to_i)
-        session[:order]["postal_code"] = street_address.postal_code
-        session[:order]["address"] = street_address.address
-        session[:order]["street_address"] = street_address.street_address
+        session[:order][:postal_code] = street_address.postal_code
+        session[:order][:address] = street_address.address
+        session[:order][:street_address] = street_address.street_address
         redirect_to input_confirm_path
       end
       
     elsif params[:address_btn].to_i == 3
-      if params[:order]["postal_code"].blank? || params[:order]["address"].blank? || params[:order]["street_address"].blank?
+      if params[:order][:postal_code].blank? || params[:order][:address].blank? || params[:order][:street_address].blank?
         @order = Order.new
         @end_user = EndUser.find(current_end_user.id)
         @addresses = current_end_user.addresses.all

@@ -35,15 +35,15 @@
             <table class="table">
                 <tr>
                     <th>送料</th>
-                    <th><%= @postage %></th>
+                    <th><%= session[:order][:postage] %></th>
                 </tr>
                 <tr>
                     <th>商品合計</th>
-                    <th><%= @total_price%></th>
+                    <th><%= @total_price %></th>
                 </tr>
                 <tr>
                     <th>請求金額</th>
-                    <th><%= (@total_price + @postage) %></th>
+                    <th><%= session[:order][:total_price] %></th>
                 </tr>
 
             </table>
@@ -53,28 +53,19 @@
     <div class="row">
         <div class="col-md-2 col-md-offset-1">
             <h3>支払い方法</h3>
-            <p><%= @order["payment"] %></p>
+            <p><%= session[:order][:payment] %></p>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4 col-md-offset-1">
             <h3>お届け先</h3>
-            <h4>〒<%= @order["postal_code"] %> <%= @order["street_address"]%></h4>
-            <h4><%= @order["address"] %></h4>
+            <h4>〒<%= session[:order]["postal_code"] %> <%= session[:order]["street_address"] %></h4>
+            <h4><%= session[:order]["address"] %></h4>
         </div>
-       
+      
     </div>
         
     <div class="row colmd-3 col-md-offset-5">
-        <%= form_for(@Order) do |f| %>
-            <%= f.hidden_field :total_price, :value => @total_price %>
-            <%= f.hidden_field :payment, :value => @order["payment"] %>
-            <%= f.hidden_field :postal_code, :value => @order["postal_code"] %>
-            <%= f.hidden_field :postage, :value => @postage %>
-            <%= f.hidden_field :address, :value => @order["address"] %>
-            <%= f.hidden_field :street_address,:value => @order["street_address"] %>
-            <%= f.submit "購入を確定する",class: "btn btn-bg btn-primary" %>
-        <% end %>
-        
+         <%= link_to "購入を確定する", orders_path, method: :post, class: "btn btn-bg btn-primary" %>
     </div>
 </div>
