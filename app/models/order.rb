@@ -7,5 +7,5 @@ class Order < ApplicationRecord
     validates :end_user_id, presence: true
     validates :payment, presence: true
     
-   
+  
 end
