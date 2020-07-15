@@ -1,4 +1,5 @@
 class EndUsers::CartItemsController < ApplicationController
+  before_action :authenticate_end_user!
   def index
     @total_price = 0
     current_end_user.cart_items.each do |cart_item|
@@ -12,7 +13,7 @@ class EndUsers::CartItemsController < ApplicationController
   def create
     isExist = false
     cart_item = CartItem.new(cart_item_params)
-
+    cart_item.end_user_id = current_end_user.id
     current_end_user.cart_items.each do |cart|
      
       if cart.item_id == cart_item.item_id.to_i
@@ -50,6 +51,6 @@ class EndUsers::CartItemsController < ApplicationController
 
   private
   def cart_item_params
-    params.require(:cart_item).permit(:end_user_id, :item_id, :amount)
+    params.require(:cart_item).permit(:item_id, :amount)
   end
 end

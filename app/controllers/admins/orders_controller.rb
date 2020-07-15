@@ -1,4 +1,6 @@
 class Admins::OrdersController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
     @orders = Order.all
   end
@@ -11,16 +13,16 @@ class Admins::OrdersController < ApplicationController
   def update
     order = Order.find(params[:id])
     order.update(order_params)
-    if order.order_status = "入金確認"
+    if order.order_status_before_type_cast == 1
       order.order_details.each do |order_detail|
-        order_detail.update_attributes(production_status: "製作待ち")
-      end   
+        order_detail.update(production_status: 1)
+      end
     end
     redirect_to admins_order_path(order.id)
   end
 
   private
     def order_params
-      params.require(:order).permit(:end_user_id, :order_status, :total_price, :payment, :postal_code, :postage, :address, :street_address)
+      params.require(:order).permit(:order_status)
     end
 end
