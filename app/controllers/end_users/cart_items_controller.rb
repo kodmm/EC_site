@@ -14,14 +14,6 @@ class EndUsers::CartItemsController < ApplicationController
     cart_item = CartItem.new(cart_item_params)
     cart_item.end_user_id = current_end_user.id
 
-        sum = cart_item.amount.to_i + cart.amount
-
-        cart.update(amount: sum)
-        isExist = true
-        break
-      end
-    end
-    unless isExist
     if current_end_user.cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
      cart_item = current_end_user.cart_items.find_by(item_id: params[:cart_item][:item_id])
      cart_item.update(amount: cart_item.amount = cart_item.amount + params[:cart_item][:amount].to_i)
@@ -30,6 +22,7 @@ class EndUsers::CartItemsController < ApplicationController
     end
     redirect_to cart_items_path
   end
+
 
   def update
     cart_item = CartItem.find(params[:id])
