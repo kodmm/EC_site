@@ -15,6 +15,7 @@ class Admins::OrderDetailsController < ApplicationController
                 isTrue = true  
             else 
                 isTrue = false
+                break
             end
         end
         if isTrue
