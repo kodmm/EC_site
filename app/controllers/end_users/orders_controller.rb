@@ -66,6 +66,20 @@ class EndUsers::OrdersController < ApplicationController
     session[:order] = Order.new(orderexam_params)
 
     session[:order][:end_user_id] = current_end_user.id
+
+    if session[:order]["address_btn"] == 1
+      session[:order]["postal_code"] = current_end_user.postal_code
+      session[:order]["street_address"] = current_end_user.street_address
+      session[:order]["address"] = current_end_user.name
+
+    elsif session[:order]["address_btn"] == 2
+      street_address = current_end_user.addresses.find_by(street_address: session[:order]["address_info"])
+      session[:order]["postal_code"] = street_address.postal_code
+      session[:order]["address"] = street_address.address
+      session[:order]["street_address"] = street_address.street_address
+      
+    else   
+      address = Address.new(address_params)
     if params[:address_btn].to_i == 1
       session[:order][:postal_code] = current_end_user.postal_code
       session[:order][:street_address] = current_end_user.street_address
