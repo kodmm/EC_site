@@ -16,4 +16,8 @@ class Item < ApplicationRecord
         return Item.where(status: 0) unless search
         Item.where(['name LIKE ?', "%#{search}%"])
     end
+
+    def add_tax
+        return self.price * 1.10
+    end
 end
