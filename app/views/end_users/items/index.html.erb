@@ -31,7 +31,7 @@
                         <br>
                         <%= item.name %>
                         <%= item.genre.name %>
-                        <p>&yen;<%= item.price %></p>
+                        <p>&yen;<%= item.add_tax.to_s(:rounded, precision: 0)  %></p>
                         <%= link_to "詳細",  item_path(item.id),class: "btn-sm btn-primary" %>
                     </div>
                  
