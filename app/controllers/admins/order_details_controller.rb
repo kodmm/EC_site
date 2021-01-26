@@ -9,18 +9,12 @@ class Admins::OrderDetailsController < ApplicationController
             order_detail.order.update(order_status: 2)
         end
         order = Order.find(order_detail.order_id)
-        isTrue = false
-        order.order_details.each do |order_detail| 
-            if order_detail.production_status_before_type_cast == 3
-                isTrue = true  
-            else 
-                isTrue = false
-                break
-            end
-        end
-        if isTrue
-            order_detail.order.update(order_status: 3)
-        end
+
+        isTrue = order.order_details.each.all? { |order_detail| order_detail.production_status_before_type_cast == 3 }
+        
+        order_detail.order.update(order_status: 3) if isTrue
+
+
         redirect_to admins_order_path(order_detail.order_id)
    
     end
