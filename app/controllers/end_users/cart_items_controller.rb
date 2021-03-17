@@ -37,7 +37,7 @@ class EndUsers::CartItemsController < ApplicationController
   end
 
   def destroy_all
-    CartItem.destroy_all
+    current_end_user.cart_items.destroy_all
     redirect_to  items_path
   end
 
